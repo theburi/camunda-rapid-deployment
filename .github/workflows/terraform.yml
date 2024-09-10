@@ -52,11 +52,7 @@ on:
 permissions:
   contents: read
 
-env:
-  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-  AWS_DEBUG: "1"  # Enable debug logging
+
 
 jobs:
   terraform:
@@ -75,7 +71,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    # Configure AWS credentials using GitHub Actions' AWS credentials action
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
+        aws-region: eu-west-1  # Adjust region as necessary
+
+        # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -86,9 +91,7 @@ jobs:
 
     - name: Verify AWS Credentials
       env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+        AWS_DEBUG: "1"
       run: |
         aws sts get-caller-identity
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
