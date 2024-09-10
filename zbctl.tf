@@ -18,9 +18,10 @@ resource "kubernetes_job" "zeebe_cli" {
 
         container {
           name  = "zeebe-cli"
-          image = "alpine:3.17"
-          command: ["/bin/sh", "-c"]
-          args: [
+          image = "node:18-alpine"
+
+          command = ["/bin/sh", "-c"]
+          args    = [
             "apk update && \
             npm install -g zbctl && \
             zbctl --address camunda-zeebe-gateway.camunda.svc.cluster.local:26500 --insecure status"
