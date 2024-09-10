@@ -18,25 +18,35 @@
 #       }
 #     }
 
-terraform {
-  backend "local" {
-    path = "terraform.tfstate"
-  }
+#  backend "local" {
+#    path = "terraform.tfstate"
+#  }
 
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.65.0"
+terraform {
+    backend "remote" {
+        # The name of your Terraform Cloud organization.
+        organization = "rapid-deployment"
+        # The name of the Terraform Cloud workspace to store Terraform state files in.
+        workspaces {
+            name = "Rapid-Github"
+            }
     }
-    kubernetes = {
-      source  = "hashicorp/kubernetes"
-      version = "~> 2.30.0"
+
+
+    required_providers {
+        aws = {
+        source  = "hashicorp/aws"
+        version = "~> 5.65.0"
+        }
+        kubernetes = {
+        source  = "hashicorp/kubernetes"
+        version = "~> 2.30.0"
+        }
+        helm = {
+        source  = "hashicorp/helm"
+        version = "~> 2.8.0"
+        }
     }
-    helm = {
-      source  = "hashicorp/helm"
-      version = "~> 2.8.0"
-    }
-  }
 }
 
 provider "aws" {
