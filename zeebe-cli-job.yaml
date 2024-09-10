@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: zeebe-cli-job
+  namespace: camunda  # Change to your namespace if needed
+spec:
+  template:
+    metadata:
+      labels:
+        app: zeebe-cli
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: zeebe-cli
+        image: node:18-alpine  # Node.js 18 on Alpine Linux
+        command: ["/bin/sh", "-c"]
+        args: [
+          "apk update && \
+          npm install -g zbctl && \
+          zbctl --address camunda-zeebe-gateway.camunda.svc.cluster.local:26500 --insecure status"
+        ]
+
+  backoffLimit: 4
+  activeDeadlineSeconds: 300  # Optional: Adjust to set a time limit for the Job
