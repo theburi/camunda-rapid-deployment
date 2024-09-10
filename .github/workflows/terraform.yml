@@ -100,6 +100,8 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
+      env:
+        TF_LOG: DEBUG
       run: terraform plan -input=false
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
