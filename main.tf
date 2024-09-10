@@ -22,14 +22,19 @@
 #    path = "terraform.tfstate"
 #  }
 
+#    backend "remote" {
+#        # The name of your Terraform Cloud organization.
+#        organization = "rapid-deployment"
+#        # The name of the Terraform Cloud workspace to store Terraform state files in.
+#        workspaces {
+#            name = "Rapid-Github"
+#            }
+#    }
+
+
 terraform {
-    backend "remote" {
-        # The name of your Terraform Cloud organization.
-        organization = "rapid-deployment"
-        # The name of the Terraform Cloud workspace to store Terraform state files in.
-        workspaces {
-            name = "Rapid-Github"
-            }
+    backend "local" {
+      path = "terraform.tfstate"
     }
 
 
