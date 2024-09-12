@@ -100,4 +100,5 @@ jobs:
       run: terraform apply -auto-approve -input=false
 
     - name: Terraform Destroy
+      if: ${{ always() }}
       run: terraform destroy -auto-approve -input=false

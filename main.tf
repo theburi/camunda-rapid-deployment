@@ -33,8 +33,10 @@
 
 
 terraform {
-    backend "local" {
-      path = "terraform.tfstate"
+    backend "s3" { 
+      bucket         = "andrey-tf"        # Replace with your S3 bucket name
+      key            = "terraform/terraform.tfstate" # This is the path where state file will be stored in S3
+      region         = "eu-west-1"             # e.g., us-west-2
     }
 
 
