@@ -1,5 +1,5 @@
 
-name: 'Terraform depoy environment'
+name: 'Terraform- clean up environment'
 
 on:
   push:
@@ -9,7 +9,6 @@ on:
 
 permissions:
   contents: read
-
 
 jobs:
   terraform:
@@ -48,18 +47,6 @@ jobs:
       working-directory: ./terraform/camunda-deployment
       run: terraform init
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan      
-      working-directory: ./terraform/camunda-deployment
-      run: terraform plan -input=false
-
-      # On push to "main", build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
-    - name: Terraform Apply
-      working-directory: ./terraform/camunda-deployment
-      run: terraform apply -auto-approve -input=false
-
-    - name: Terraform Destroy
-      if: ${{ always() }}
+    - name: Terraform Destroy  
       working-directory: ./terraform/camunda-deployment
       run: terraform destroy -auto-approve -input=false
