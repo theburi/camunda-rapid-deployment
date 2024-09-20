@@ -46,11 +46,8 @@ jobs:
       working-directory: ./terraform/camunda-deployment
       run: terraform init
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan      
-      working-directory: ./terraform/camunda-deployment
-      run: terraform plan -destroy -input=false
+
 
     - name: Terraform Destroy  
       working-directory: ./terraform/camunda-deployment
-      run: terraform destroy -auto-approve -input=false
+      run: terraform destroy -auto-approve -input=false -refresh=false
