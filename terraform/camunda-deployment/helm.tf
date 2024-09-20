@@ -26,6 +26,12 @@ resource "helm_release" "camunda-platform" {
 
     connectors:
         enabled: false
+
+    elasticsearch:
+      master:
+        resources:
+          requests:
+            memory: 1Gi
         
     EOF
   ]
