@@ -58,8 +58,3 @@ jobs:
     - name: Terraform Apply
       working-directory: ./terraform/camunda-deployment
       run: terraform apply -auto-approve -input=false
-
-    - name: Terraform Destroy
-      if: ${{ always() }}
-      working-directory: ./terraform/camunda-deployment
-      run: terraform destroy -auto-approve -input=false
