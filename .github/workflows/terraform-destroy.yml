@@ -10,7 +10,7 @@ on:
 permissions:
   contents: read
   id-token: write
-  
+
 jobs:
   terraform:
     name: 'Terraform'
@@ -45,6 +45,11 @@ jobs:
     - name: Terraform Init
       working-directory: ./terraform/camunda-deployment
       run: terraform init
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan      
+      working-directory: ./terraform/camunda-deployment
+      run: terraform plan -destroy -input=false
 
     - name: Terraform Destroy  
       working-directory: ./terraform/camunda-deployment
