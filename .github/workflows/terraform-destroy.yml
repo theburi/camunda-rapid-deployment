@@ -46,11 +46,6 @@ jobs:
       working-directory: ./terraform/camunda-deployment
       run: terraform init
 
-    - name: remove resource
-      working-directory: ./terraform/camunda-deployment
-      run: terraform state rm module.eks_cluster.kubernetes_storage_class_v1.ebs_sc
-
-
     - name: Terraform Destroy  
       working-directory: ./terraform/camunda-deployment
-      run: terraform destroy -auto-approve -input=false -refresh=false
+      run: terraform destroy -auto-approve -input=false
