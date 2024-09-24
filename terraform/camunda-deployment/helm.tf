@@ -20,9 +20,9 @@ resource "helm_release" "camunda-platform" {
         keycloak:
             enabled: false
     zeebe:
-      replicas: 3
+      replicas: 1
       gateway:
-        replicas: 2
+        replicas: 1
 
     connectors:
         enabled: false
