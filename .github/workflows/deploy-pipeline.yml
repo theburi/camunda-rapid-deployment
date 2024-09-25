@@ -5,9 +5,19 @@ on:
     branches: [ "main" ]
   pull_request:
 
+  workflow_run:
+    workflows: ['Terraform depoy environment']
+    types:
+      - completed
+
 permissions:
   contents: read
+  id-token: write
+# Dependency to a forking workflow
 
+
+  
+  
 jobs:
   terraform:
     name: 'Terraform'
