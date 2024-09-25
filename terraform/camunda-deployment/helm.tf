@@ -32,6 +32,7 @@ resource "helm_release" "camunda-platform" {
         resources:
           requests:
             memory: 1Gi
+            cpu: .5
         
     EOF
   ]

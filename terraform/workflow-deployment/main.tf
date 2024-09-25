@@ -2,7 +2,7 @@
 terraform {
     backend "s3" { 
       bucket         = "andrey-tf"        # Replace with your S3 bucket name
-      key            = "workflow/terraform.tfstate" # This is the path where state file will be stored in S3
+      key            = "workflow/workflow-deployment.tfstate" # This is the path where state file will be stored in S3
       region         = "eu-west-1"             # e.g., us-west-2
     }
 
@@ -25,7 +25,7 @@ provider "aws" {
 
 # Configure the Kubernetes provider
 provider "kubernetes" {
-  host                   = module.eks_cluster.cluster_endpoint
+  host                   = data.aws_eks_cluster.cluster.endpoint
   cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority[0].data)
   token                  = data.aws_eks_cluster_auth.cluster.token
 
@@ -37,16 +37,10 @@ provider "kubernetes" {
   }
 }
 
-
-
-# Data source to fetch the EKS cluster authentication token
 data "aws_eks_cluster_auth" "cluster" {
   name = var.cluster_name
-  depends_on = [module.eks_cluster]
 }
 
 data "aws_eks_cluster" "cluster" {
   name = var.cluster_name
-  depends_on = [module.eks_cluster]
 }
-
