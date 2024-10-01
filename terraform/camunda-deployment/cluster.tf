@@ -12,7 +12,7 @@ module "eks_cluster" {
 }
 
 data "aws_iam_user" "second_user" {
-  user_name = "123302325581" # Replace with the IAM user you want to add
+  user_name = "andrey.belik@camunda.com" # Replace with the IAM user you want to add
 }
 
 resource "kubernetes_config_map" "aws_auth" {
