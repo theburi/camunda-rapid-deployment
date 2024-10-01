@@ -33,27 +33,27 @@
 
 
 terraform {
-    backend "s3" { 
-      bucket         = "andrey-tf"        # Replace with your S3 bucket name
-      key            = "terraform/terraform.tfstate" # This is the path where state file will be stored in S3
-      region         = "eu-west-1"             # e.g., us-west-2
-    }
+  backend "s3" {
+    bucket = "andrey-tf"                   # Replace with your S3 bucket name
+    key    = "terraform/terraform.tfstate" # This is the path where state file will be stored in S3
+    region = "eu-west-1"                   # e.g., us-west-2
+  }
 
 
-    required_providers {
-        aws = {
-        source  = "hashicorp/aws"
-        version = "~> 5.65.0" 
-        }
-        kubernetes = {
-        source  = "hashicorp/kubernetes"
-        version = "~> 2.30.0"
-        }
-        helm = {
-        source  = "hashicorp/helm"
-        version = "~> 2.8.0"
-        }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.65.0"
     }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "~> 2.30.0"
+    }
+    helm = {
+      source  = "hashicorp/helm"
+      version = "~> 2.8.0"
+    }
+  }
 }
 
 provider "aws" {
@@ -92,12 +92,12 @@ provider "helm" {
 
 # Data source to fetch the EKS cluster authentication token
 data "aws_eks_cluster_auth" "cluster" {
-  name = var.cluster_name
+  name       = var.cluster_name
   depends_on = [module.eks_cluster]
 }
 
 data "aws_eks_cluster" "cluster" {
-  name = var.cluster_name
+  name       = var.cluster_name
   depends_on = [module.eks_cluster]
 }
 

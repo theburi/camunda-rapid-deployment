@@ -25,5 +25,5 @@ variable "secret_password" {
 variable "default_database_name" {
   description = "Database name"
   type        = string
-  default = "camunda"
+  default     = "camunda"
 }
