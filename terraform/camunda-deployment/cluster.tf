@@ -11,10 +11,7 @@ module "eks_cluster" {
   cluster_node_ipv4_cidr    = "10.192.0.0/16"
 }
 
-data "aws_iam_user" "second_user" {
-  user_name = "andrey.belik@camunda.com" # Replace with the IAM user you want to add
-}
-
+# Add your SSO role to the aws-auth ConfigMap
 resource "kubernetes_config_map" "aws_auth" {
   depends_on = [module.eks_cluster]
 
@@ -24,9 +21,9 @@ resource "kubernetes_config_map" "aws_auth" {
   }
 
   data = {
-    mapUsers = <<YAML
-- userarn: ${data.aws_iam_user.second_user.arn}
-  username: second-user-name # Kubernetes username
+    mapRoles = <<YAML
+- rolearn: arn:aws:iam::123302325581:role/AWSReservedSSO_SystemAdministrator_3272c85503826b83
+  username: andrey.belik
   groups:
     - system:masters
 YAML
