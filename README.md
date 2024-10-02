@@ -14,7 +14,7 @@ I also create IAM user and with OIDC granted access to GitHub Actions execution
 /teraform/workflow-deployment is fodler where I deloy my Workflow project every time I get PR create and it needs to run through my integraton tests or even deploy to production. You can see a set of Action based on this example that run Unit Tests, integrations tests and if pass deploy this workflow to production.
 
 Add IAM access Entry
-aws eks create-access-entry --cluster-name my-cluster --principal-arn arn:aws:iam::111122223333:role/my-role --type STANDARD --user Viewers --kubernetes-groups Viewers
+aws eks create-access-entry --cluster-name my-cluster --principal-arn AWSReservedSSO_SystemAdministrator_3272c85503826b83/andrey.belik@camunda.com --type STANDARD 
 
 
 Create new EKS context `aws eks --region eu-west-1 update-kubeconfig --name cluster-name`
