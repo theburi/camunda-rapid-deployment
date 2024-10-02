@@ -22,7 +22,7 @@ resource "kubernetes_job" "zeebe_cli" {
 
           command = ["/bin/sh", "-c"]
           args    = [
-            "apk update && npm install -g zbctl && zbctl --address camunda-zeebe-gateway.camunda.svc.cluster.local:26500 --insecure status"
+            "apk update && npm install -g zbctl && zbctl --address camunda-zeebe-gateway.camunda.svc.cluster.local:26500 --insecure ../../Workflow/process_payment.bpmn"
           ]
         }
       }
