@@ -22,7 +22,7 @@ resource "kubernetes_job" "zeebe_cli" {
 
           command = ["/bin/sh", "-c"]
           args    = [
-            "apk update && apk add curl && npm install -g zbctl && curl -O https://raw.githubusercontent.com/theburi/camunda-rapid-deployment/refs/heads/main/Workflow/src/main/resources/process-payments.bpmn && zbctl deploy --address camunda-zeebe-gateway.camunda.svc.cluster.local:26500 --insecure process_payment.bpmn"
+            "apk update && apk add curl && npm install -g zbctl && curl -O https://raw.githubusercontent.com/theburi/camunda-rapid-deployment/refs/heads/main/Workflow/src/main/resources/process_payments.bpmn && zbctl deploy --address camunda-zeebe-gateway.camunda.svc.cluster.local:26500 --insecure process_payments.bpmn"
           ]
         }
       }

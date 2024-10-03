@@ -34,10 +34,10 @@ resource "kubernetes_deployment" "spring_app" {
             value = "prod"
           }
                     # Inject Kubernetes service name as environment variable
-          env {
-            name  = "ZEEBE_GATEWAY_ADDRESS"
-            value = "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
-          }
+        #   env {
+        #     name  = "ZEEBE_GATEWAY_ADDRESS"
+        #     value = "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+        #   }
         }
       }
     }
