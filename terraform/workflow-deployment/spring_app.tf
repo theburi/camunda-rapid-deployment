@@ -1,7 +1,7 @@
 resource "kubernetes_deployment" "spring_app" {
   metadata {
     name      = "spring-app"
-    namespace = "default"
+    namespace = "camunda"
   }
 
   spec {
@@ -32,6 +32,11 @@ resource "kubernetes_deployment" "spring_app" {
           env {
             name  = "SPRING_PROFILES_ACTIVE"
             value = "prod"
+          }
+                    # Inject Kubernetes service name as environment variable
+          env {
+            name  = "ZEEBE_GATEWAY_ADDRESS"
+            value = "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
           }
         }
       }

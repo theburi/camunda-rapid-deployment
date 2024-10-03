@@ -1,4 +1,4 @@
-name: 'CI Pipeline for my Workflows'
+name: 'CI Pipeline for Credit card charge Application'
 
 on:
   push:
