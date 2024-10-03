@@ -27,13 +27,13 @@ jobs:
 
       - name: Build Docker image
         working-directory: ./Workflow
-        run: docker build -t my-getting-started:${{ github.sha }} .
+        run: docker build -t theburi/my-getting-started:${{ github.sha }} .
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
       - name: Push Docker image
-        run: docker push my-getting-started:${{ github.sha }}
+        run: docker push theburi/my-getting-started:${{ github.sha }}
 
   terraform-deploy:
     name: 'Terraform'
