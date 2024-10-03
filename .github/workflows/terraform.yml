@@ -4,7 +4,9 @@ name: 'Terraform depoy environment'
 on:
   push:
     branches: [ "main" ]
-  pull_request:
+    paths:
+      - .github/**
+      - terraform/**
   workflow_dispatch:
 
 permissions:

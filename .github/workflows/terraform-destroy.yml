@@ -2,9 +2,7 @@
 name: 'Terraform- clean up environment'
 
 on:
-  push:
-    branches: [ "main1" ]
-  pull_request:
+
   workflow_dispatch:
 
 permissions:
