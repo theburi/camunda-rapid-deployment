@@ -25,7 +25,7 @@ resource "kubernetes_deployment" "spring_app" {
           name  = "spring-app"
           image = "theburi/my-getting-started:${var.image_tag}"  # The image tag from the GitHub Actions workflow
 
-          ports {
+          port {
             container_port = 8080
           }
 
