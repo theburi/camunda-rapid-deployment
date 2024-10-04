@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Terraform - EKS and Camunda 8 Helm Chart'
     runs-on: ubuntu-latest
     environment: production
 

@@ -19,7 +19,7 @@ permissions:
 jobs:
   build:
     environment: production
-    name: Deploy Java Spring App
+    name: Build Java Spring App
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -36,7 +36,7 @@ jobs:
         run: docker push theburi/my-getting-started:${{ github.sha }}
 
   terraform-deploy:
-    name: 'Terraform'
+    name: 'Deloy to Camunda Cluster'
     runs-on: ubuntu-latest
     environment: production
     needs:
