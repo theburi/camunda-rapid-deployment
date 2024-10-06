@@ -11,10 +11,13 @@ import io.camunda.zeebe.spring.client.annotation.Variable;
 
 @Component
 public class ChargeCreditCardWorker {
+
   private final static Logger LOG = LoggerFactory.getLogger(ChargeCreditCardWorker.class);
+
   @JobWorker(type = "charge-credit-card")
   public Map<String, Double> chargeCreditCard(@Variable(name = "totalWithTax") Double totalWithTax) {
     LOG.info("charging credit card: {}", totalWithTax);
+
     return Map.of("amountCharged", totalWithTax);
   }
 }

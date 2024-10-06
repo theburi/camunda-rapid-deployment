@@ -13,7 +13,7 @@ import io.camunda.zeebe.client.ZeebeClient;
 import io.camunda.zeebe.spring.client.annotation.Deployment;
 
 @SpringBootApplication
-// @Deployment(resources = "classpath:process-payments.bpmn")
+@Deployment(resources = "classpath:process-payments.bpmn")
 public class ProcessPaymentsApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ProcessPaymentsApplication.class);
@@ -27,7 +27,7 @@ public class ProcessPaymentsApplication implements CommandLineRunner {
 
 	@Override
 	public void run(final String... args) {
-		var bpmnProcessId = "process_payment"; // or whatever the key is
+		var bpmnProcessId = "process-payments"; // or whatever the key is
 		var event = zeebeClient.newCreateInstanceCommand()
 				.bpmnProcessId(bpmnProcessId)
 				.latestVersion()

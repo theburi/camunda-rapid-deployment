@@ -5,48 +5,47 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>3.3.0</version>
+		<relativePath/>
+		<!-- lookup parent from repository -->
 	</parent>
-	<groupId>zeebe-cli-job-8gsg5</groupId>
+	<groupId>io.camunda.demo</groupId>
 	<artifactId>process_payments</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Process payments</name>
+	<name>process_payments</name>
 	<description>Process payments with Camunda</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
-		<java.version>23</java.version>
+		<java.version>17</java.version>
 	</properties>
+	<repositories>
+		<repository>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>identity</id>
+			<name>Camunda Identity</name>
+			<url>https://artifacts.camunda.com/artifactory/camunda-identity/</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-   			<groupId>io.camunda</groupId>
-   			<artifactId>spring-boot-starter-camunda-sdk</artifactId>
-   			<version>8.5.0</version>
+			<groupId>io.camunda</groupId>
+			<artifactId>spring-boot-starter-camunda-sdk</artifactId>
+			<version>8.5.0</version>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -55,6 +54,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-	</repositories>
 </project>
