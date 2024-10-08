@@ -2,8 +2,8 @@ resource "helm_release" "camunda-platform" {
   name       = "camunda"
   repository = "https://helm.camunda.io"
   chart      = "camunda-platform"
-  version    = "10.4.1"
-  # version    = "11.0.0"
+  # version    = "10.4.1"
+  version    = "11.0.0"
   namespace  = "camunda"
 
   create_namespace = true
