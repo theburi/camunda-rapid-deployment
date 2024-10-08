@@ -3,11 +3,12 @@ resource "helm_release" "camunda-platform" {
   repository = "https://helm.camunda.io"
   chart      = "camunda-platform"
   version    = "10.4.1"
+  # version    = "11.0.0"
   namespace  = "camunda"
 
   create_namespace = true
 
-  values = [file("${path.module}/values-v8.5.yaml")]
+  values = [file("${path.module}/values-v8.6.yaml")]
 
   # Inline set values based on your original YAML configuration
   set {
