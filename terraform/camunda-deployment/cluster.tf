@@ -4,7 +4,7 @@ module "eks_cluster" {
   region                = "eu-west-1"    # change to your AWS region
   name                  = "demo-cluster-name" # change to name of your choosing
   np_instance_types     = ["m6i.xlarge"]
-  np_desired_node_count = 4
+  np_desired_node_count = 3
 
   # Set CIDR ranges or use the defaults
   cluster_service_ipv4_cidr = "10.190.0.0/16"

@@ -26,12 +26,12 @@ resource "helm_release" "camunda-platform" {
   }
 
   set {
-    name  = "zeebe.replicas"
+    name  = "zeebe.clusterSize"
     value = "1"
   }
 
   set {
-    name  = "zeebe.gateway.replicas"
+    name  = "zeebeGateway.replicas"
     value = "1"
   }
 
