@@ -31,6 +31,16 @@ resource "helm_release" "camunda-platform" {
   }
 
   set {
+    name  = "zeebe.replicationFactor"
+    value = "1"
+  }
+
+  set {
+    name  = "zeebe.partitionsCount"
+    value = "1"
+  }
+    
+  set {
     name  = "zeebeGateway.replicas"
     value = "1"
   }
