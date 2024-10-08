@@ -2,12 +2,12 @@ resource "helm_release" "camunda-platform" {
   name       = "camunda"
   repository = "https://helm.camunda.io"
   chart      = "camunda-platform"
-  version    = "11.0.0"
+  version    = "10.4.0"
   namespace  = "camunda"
 
   create_namespace = true
 
-  values = [file("${path.module}/values-v8.6.yaml")]
+  values = [file("${path.module}/values-v8.5.yaml")]
 
   # Inline set values based on your original YAML configuration
   set {
@@ -49,6 +49,6 @@ resource "helm_release" "camunda-platform" {
     name  = "elasticsearch.master.resources.requests.cpu"
     value = "0.5"
   }
-
+  timeout = 1200 # Timeout in seconds
   depends_on = [module.eks_cluster]
 }
