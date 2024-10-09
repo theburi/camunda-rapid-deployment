@@ -2,29 +2,15 @@ resource "helm_release" "camunda-platform" {
   name       = "camunda"
   repository = "https://helm.camunda.io"
   chart      = "camunda-platform"
-  # version    = "10.4.1"
-  version    = "11.0.0"
+  version    = "10.4.1"
+  # version    = "11.0.0"
   namespace  = "camunda"
 
   create_namespace = true
 
-  values = [file("${path.module}/values-v8.6.yaml")]
+  values = [file("${path.module}/values-v8.5.yaml")]
 
   # Inline set values based on your original YAML configuration
-  set {
-    name  = "global.identity.auth.enabled"
-    value = "false"
-  }
-
-  set {
-    name  = "identity.enabled"
-    value = "false"
-  }
-
-  set {
-    name  = "identity.keycloak.enabled"
-    value = "false"
-  }
 
   set {
     name  = "zeebe.clusterSize"
@@ -61,7 +47,61 @@ resource "helm_release" "camunda-platform" {
     value = "0.5"
   }
 
+  # Global identity.auth configuration with existing secrets
+  set {
+    name  = "global.identity.auth.operate.existingSecret.name"
+    value = "identity-secret-for-components"
+  }
+
+  set {
+    name  = "global.identity.auth.tasklist.existingSecret.name"
+    value = "identity-secret-for-components"
+  }
+
+  set {
+    name  = "global.identity.auth.optimize.existingSecret.name"
+    value = "identity-secret-for-components"
+  }
+
+  set {
+    name  = "global.identity.auth.webModeler.existingSecret.name"
+    value = "identity-secret-for-components"
+  }
+
+  set {
+    name  = "global.identity.auth.connectors.existingSecret.name"
+    value = "identity-secret-for-components"
+  }
+
+  set {
+    name  = "global.identity.auth.console.existingSecret.name"
+    value = "identity-secret-for-components"
+  }
+
+  set {
+    name  = "global.identity.auth.zeebe.existingSecret.name"
+    value = "identity-secret-for-components"
+  }
 
   timeout = 600 # Timeout in seconds
   depends_on = [module.eks_cluster]
+}
+
+resource "kubernetes_secret" "identity_secret_for_components" {
+  metadata {
+    name      = "identity-secret-for-components"
+    namespace = "camunda"
+  }
+
+  data = {
+    operate-secret     = "VmVyeUxvbmdTdHJpbmc="
+    tasklist-secret    = "VmVyeUxvbmdTdHJpbmc="
+    optimize-secret    = "VmVyeUxvbmdTdHJpbmc="
+    connectors-secret  = "VmVyeUxvbmdTdHJpbmc="
+    console-secret     = "VmVyeUxvbmdTdHJpbmc="
+    keycloak-secret    = "VmVyeUxvbmdTdHJpbmc="
+    zeebe-secret       = "VmVyeUxvbmdTdHJpbmc="
+  }
+
+  type = "Opaque"
 }
