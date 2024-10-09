@@ -82,6 +82,22 @@ resource "helm_release" "camunda-platform" {
     name  = "global.identity.auth.zeebe.existingSecret.name"
     value = "identity-secret-for-components"
   }
+  
+  # Set Keycloak configurations (update these values as needed)
+  set {
+    name  = "identity.keycloak.url"
+    value = "http://camunda-platform-keycloak.camunda.svc.cluster.local/auth"
+  }
+
+  set {
+    name  = "identity.keycloak.clientID"
+    value = "camunda-identity"
+  }
+
+  set {
+    name  = "identity.keycloak.realm"
+    value = "camunda"
+  }
 
   timeout = 600 # Timeout in seconds
   depends_on = [module.eks_cluster]
