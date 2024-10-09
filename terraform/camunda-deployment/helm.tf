@@ -60,6 +60,12 @@ resource "helm_release" "camunda-platform" {
     name  = "elasticsearch.master.resources.requests.cpu"
     value = "0.5"
   }
+
+    set {
+    name  = "elasticsearch.master.replicaCount"
+    value = "1"
+  }
+
   timeout = 1200 # Timeout in seconds
   depends_on = [module.eks_cluster]
 }
