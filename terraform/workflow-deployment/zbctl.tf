@@ -41,7 +41,7 @@ resource "kubernetes_job" "zeebe_cli" {
 
           env {
             name  = "ZEEBE_AUTHORIZATION_SERVER_URL"
-            value = "http://camunda-keycloak.camunda.svc.cluster.local:18080/auth/realms/camunda-platform/protocol/openid-connect/token"
+            value = "http://camunda-keycloak.camunda.svc.cluster.local/auth/realms/camunda-platform/protocol/openid-connect/token"
           }
 
           env {
