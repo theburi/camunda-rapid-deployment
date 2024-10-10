@@ -24,7 +24,43 @@ resource "kubernetes_job" "zeebe_cli" {
           args    = [
             "apk update && apk add curl && npm install -g zbctl &&  zbctl status --address camunda-zeebe-gateway.camunda.svc.cluster.local:26500 --insecure"
           ]
+
+          env {
+            name  = "SPRING_PROFILES_ACTIVE"
+            value = "prod"
+          }
+                    # Inject Kubernetes service name as environment variable
+          env {
+            name  = "ZEEBE_ADDRESS"
+            value = "camunda-zeebe-gateway.camunda.svc.cluster.local:26500"
+          }
+          env {
+            name  = "ZEEBE_CLIENT_ID"
+            value = "zeebe"
+          }
+
+          env {
+            name  = "ZEEBE_AUTHORIZATION_SERVER_URL"
+            value = "http://camunda.local:18080/auth/realms/camunda-platform/protocol/openid-connect/token"
+          }
+
+          env {
+            name  = "ZEEBE_TOKEN_AUDIENCE"
+            value = "zeebe-api"
+          }
+          # Reference the secret for sensitive value
+          env {
+            name = "ZEEBE_CLIENT_SECRET"
+            value_from {
+              secret_key_ref {
+                name = kubernetes_secret.zeebe_auth.metadata[0].name
+                key  = "ZEEBE_CLIENT_SECRET"
+              }
+            }
+          }
         }
+
+      
       }
     }
   }
