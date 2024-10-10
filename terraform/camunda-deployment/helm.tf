@@ -1,3 +1,11 @@
+# Create the Camunda namespace
+resource "kubernetes_namespace" "camunda_namespace" {
+  metadata {
+    name = "camunda"
+  }
+  depends_on = [ module.eks_cluster ]
+}
+
 resource "helm_release" "camunda-platform" {
   name       = "camunda"
   repository = "https://helm.camunda.io"
@@ -99,8 +107,11 @@ resource "helm_release" "camunda-platform" {
     value = "camunda"
   }
 
-  timeout = 600 # Timeout in seconds
-  depends_on = [module.eks_cluster]
+  timeout = 600 # Timeout in seconds  
+  depends_on = [
+    kubernetes_secret.identity_secret_for_components,
+    module.eks_cluster
+  ]
 }
 
 resource "kubernetes_secret" "identity_secret_for_components" {
@@ -120,4 +131,8 @@ resource "kubernetes_secret" "identity_secret_for_components" {
   }
 
   type = "Opaque"
+  depends_on = [
+    kubernetes_namespace.camunda_namespace,
+    module.eks_cluster
+  ]
 }
