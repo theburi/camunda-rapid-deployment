@@ -21,6 +21,11 @@ resource "helm_release" "camunda-platform" {
   # Inline set values based on your original YAML configuration
 
   set {
+    name  = "optimize.enabled"
+    value = "false"
+  }
+
+  set {
     name  = "zeebe.clusterSize"
     value = "1"
   }
