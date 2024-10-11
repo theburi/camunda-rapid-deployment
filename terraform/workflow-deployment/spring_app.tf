@@ -66,7 +66,6 @@ resource "kubernetes_deployment" "spring_app" {
       }
     }
   }
-  depends_on = [ kubernetes_secret.zeebe_auth ]
 }
 
 variable "image_tag" {
