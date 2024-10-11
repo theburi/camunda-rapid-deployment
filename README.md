@@ -1,12 +1,14 @@
-# camunda-rapid-deployment
+
 Demo for CamundaCon New York 2024
 
-# First demo is a demo of EKS and Camunda Helm deployment with Terraform
+# Demo 1: AWS EKS and Camunda Helm deployment with Terraform
 
+## Let introduce our up and assumption
 
-## Let me introduce my set up and assumption
+We use AWS EKS guide and provided Terraform scripts https://docs.camunda.io/docs/self-managed/setup/deploy/amazon/amazon-eks/ 
+We created GitHub Actions to deploy Terraform.
 
-For simplicity I am running something very simple. We assume some knowledge of IaC knowledge, but we will do our best to explain principles.
+For simplicity we removed few configuration options. We assume some knowledge of IaC, but we will do our best to explain principles.
 What you will not see:
 * EKS is deployed simply- without Vault, IAM service accounts, Ingresses or TLS 
 * GitHub Actions: Many standard processes are omitted to make this presentation more readable: style checks, PR Actions.
@@ -29,13 +31,12 @@ Lets talk about this set up.
 
 For simplicity we do not show a full test suit and just run one test example to reduce run duration for this demo.
 
-Add IAM access Entry
-aws eks create-access-entry --cluster-name demo-cluster-name --region eu-west-1  --principal-arn arn:aws:iam::123302325581:role/aws-reserved/sso.amazonaws.com/eu-central-1/AWSReservedSSO_SystemAdministrator_3272c85503826b83 --type STANDARD 
-
+Add IAM access Entry and Create new EKS context 
+aws eks create-access-entry --cluster-name demo-cluster-name --region eu-west-1  --principal-arn arn:aws:iam::123302325581:role/aws-reserved/sso.amazonaws.com/eu-central-1/AWSReservedSSO_SystemAdministrator_3272c85503826b83 --type STANDARD
 aws eks associate-access-policy --cluster-name demo-cluster-name --principal-arn arn:aws:iam::123302325581:role/aws-reserved/sso.amazonaws.com/eu-central-1/AWSReservedSSO_SystemAdministrator_3272c85503826b83 --policy-arn arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy --access-scope type=cluster --region eu-west-1
+aws eks --region eu-west-1 update-kubeconfig --name demo-cluster-name
 
 
-Create new EKS context `aws eks --region eu-west-1 update-kubeconfig --name demo-cluster-name`
 
 
 ### Demo on the environment:

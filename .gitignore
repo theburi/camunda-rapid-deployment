@@ -3,3 +3,4 @@ terraform.tf*
 .terraform/*
 Workflow/target/*
 .DS_Store
+.vscode/settings.json

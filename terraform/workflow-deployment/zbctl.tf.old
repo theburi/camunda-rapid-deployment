@@ -53,8 +53,8 @@ resource "kubernetes_job" "zeebe_cli" {
             name = "ZEEBE_CLIENT_SECRET"
             value_from {
               secret_key_ref {
-                name = kubernetes_secret.zeebe_auth.metadata[0].name
-                key  = "ZEEBE_CLIENT_SECRET"
+                name = "identity-secret-for-components"
+                key  = "zeebe-secret"  # Reference the 'zeebe-secret' key within the secret
               }
             }
           }

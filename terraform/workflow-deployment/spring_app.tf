@@ -57,8 +57,8 @@ resource "kubernetes_deployment" "spring_app" {
             name = "ZEEBE_CLIENT_SECRET"
             value_from {
               secret_key_ref {
-                name = kubernetes_secret.zeebe_auth.metadata[0].name
-                key  = "ZEEBE_CLIENT_SECRET"
+                name = "identity-secret-for-components"
+                key  = "zeebe-secret"  # Reference the 'zeebe-secret' key within the secret
               }
             }
           }
@@ -73,17 +73,4 @@ variable "image_tag" {
   description = "The tag of the Docker image to deploy"
   type        = string
   default     = "latest"
-}
-
-resource "kubernetes_secret" "zeebe_auth" {
-  metadata {
-    name      = "zeebe-auth"
-    namespace = "camunda"
-  }
-
-  data = {
-    ZEEBE_CLIENT_SECRET = "VmVyeUxvbmdTdHJpbmc="  # Base64 encoded value
-  }
-
-  type = "Opaque"
 }

@@ -19,11 +19,21 @@
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_05ahdgj</bpmn:incoming>
       <bpmn:outgoing>Flow_1fvijcp</bpmn:outgoing>
+      <bpmn:outgoing>Flow_02nr41a</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:endEvent id="Event_0fho87c" name="Payment executed">
       <bpmn:incoming>Flow_1fvijcp</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1fvijcp" sourceRef="Activity_1uwde3z" targetRef="Event_0fho87c" />
+    <bpmn:task id="Activity_0i9axyf" name="test">
+      <bpmn:incoming>Flow_02nr41a</bpmn:incoming>
+      <bpmn:outgoing>Flow_1m9871y</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_02nr41a" sourceRef="Activity_1uwde3z" targetRef="Activity_0i9axyf" />
+    <bpmn:endEvent id="Event_0jcdqcv">
+      <bpmn:incoming>Flow_1m9871y</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1m9871y" sourceRef="Activity_0i9axyf" targetRef="Event_0jcdqcv" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="process-payments">
@@ -47,6 +57,13 @@
           <dc:Bounds x="588" y="142" width="45" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0i9axyf_di" bpmnElement="Activity_0i9axyf">
+        <dc:Bounds x="600" y="190" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0jcdqcv_di" bpmnElement="Event_0jcdqcv">
+        <dc:Bounds x="772" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_075vthc_di" bpmnElement="Flow_075vthc">
         <di:waypoint x="215" y="117" />
         <di:waypoint x="270" y="117" />
@@ -58,6 +75,16 @@
       <bpmndi:BPMNEdge id="Flow_1fvijcp_di" bpmnElement="Flow_1fvijcp">
         <di:waypoint x="530" y="117" />
         <di:waypoint x="592" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02nr41a_di" bpmnElement="Flow_02nr41a">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="570" y="117" />
+        <di:waypoint x="570" y="230" />
+        <di:waypoint x="600" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1m9871y_di" bpmnElement="Flow_1m9871y">
+        <di:waypoint x="700" y="230" />
+        <di:waypoint x="772" y="230" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
